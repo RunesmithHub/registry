@@ -83,6 +83,9 @@ jobs:
           HUB_FEED_BUCKET: ${{ vars.HUB_FEED_BUCKET }}
           HUB_FEED_ACCESS_KEY_ID: ${{ secrets.HUB_FEED_ACCESS_KEY_ID }}
           HUB_FEED_SECRET_ACCESS_KEY: ${{ secrets.HUB_FEED_SECRET_ACCESS_KEY }}
+          # R2 rejects the whole-object checksums the AWS SDK adds to multipart uploads.
+          AWS_REQUEST_CHECKSUM_CALCULATION: WHEN_REQUIRED
+          AWS_RESPONSE_CHECKSUM_VALIDATION: WHEN_REQUIRED
         run: |
           mkdir -p "$RUNNER_TEMP/publications"
           rshub publish artifacts --registry . --index index/site --work "$RUNNER_TEMP/artifacts" --out "$RUNNER_TEMP/publications/publications.json"
