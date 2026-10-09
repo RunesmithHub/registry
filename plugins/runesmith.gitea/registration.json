@@ -1,0 +1,18 @@
+{
+  "id": "runesmith.gitea",
+  "repository": {
+    "id": 1412459913,
+    "url": "https://github.com/RunesmithHub/plugin-gitea",
+    "path": ".",
+    "tagPrefix": "v"
+  },
+  "maintainers": [
+    {
+      "id": 59077048,
+      "login": "DutchyD"
+    }
+  ],
+  "tier": "official",
+  "state": "registered",
+  "registeredAt": "2026-10-09T21:34:06Z"
+}
