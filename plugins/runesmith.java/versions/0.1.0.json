@@ -1,0 +1,140 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "b4bab6f2a81e0b861b6095a2c75714cde493a56e",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/runesmith.java-0.1.0.rsplugin"
+    ],
+    "sha256": "902fb29354dbd4ce5cf1edd85864d68234ff4fff604f09aee3e2e190e423218e",
+    "length": 328007
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/runesmith.java-0.1.0.source.tar.gz"
+    ],
+    "sha256": "cd23f8dc71f2321d8692480dde8c53b23204dae77006ba5f199d3dede3f0e268",
+    "length": 119437
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/runesmith.java-0.1.0.cdx.json"
+    ],
+    "sha256": "1daef743345bac5cd83398d19f379e8eecd121714269e86d014bf94210005aad",
+    "length": 7315
+  },
+  "contracts": {
+    "assembly": "Runesmith.Java.Contracts.dll",
+    "sha256": "95b57ff76205d529ab5844324eb83eac0a0f886ae8d178b0c50c85e809c1322e",
+    "package": "RunesmithHub.Runesmith.Java.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.1.0 <0.2.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Lists JDK distributions and downloads the JDKs you choose to install."
+      },
+      {
+        "id": "process",
+        "reason": "Runs Maven, Gradle and java to build, run and test your projects."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Reads your projects' build files and keeps the JDKs it installs."
+      },
+      {
+        "id": "environment",
+        "reason": "Finds your JDK through JAVA_HOME."
+      }
+    ],
+    "detected": [
+      "environment",
+      "filesystem",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "api.adoptium.net",
+    "api.foojay.io",
+    "*"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "new-nuget-package",
+      "heuristic",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/37995565017",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The first release of Java on the Runesmith Hub.",
+  "summary": "Java highlighting, completion, navigation and problems, building with Maven or Gradle, and JDK downloads.",
+  "name": "Java",
+  "categories": [
+    "Languages",
+    "Build and run"
+  ],
+  "keywords": [
+    "java",
+    "maven",
+    "gradle",
+    "jdk"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/11",
+  "trackingIssue": 11,
+  "buildRun": 37995565017,
+  "analysisDigest": "c228d3102ebdabbb58101ddaf62827e5f206155a31ea713f42a364a6078244f4",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Java.Contracts.0.1.0.nupkg",
+      "sha256": "cbae12cca8be3e60c9d3e5e90ba10a1f925959a19bd3106daf608c3ccf538d21",
+      "length": 3066
+    }
+  }
+}
