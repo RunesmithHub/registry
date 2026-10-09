@@ -114,5 +114,7 @@ jobs:
       contents: read
       actions: read
     uses: ./.github/workflows/build.yml
+    # A called workflow sees no secrets, not even those of its jobs' environments, unless the caller passes them; only environments hold any.
+    secrets: inherit # zizmor: ignore[secrets-inherit]
     with:
       job: ${{ toJSON(matrix) }}
