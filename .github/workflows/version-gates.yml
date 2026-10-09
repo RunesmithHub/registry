@@ -1,0 +1,137 @@
+# The three required checks of every registry pull request, reported as the commit statuses hub/verify, hub/review and hub/hold. They read
+# the pull request as data through Git and the API and never run its code; an hourly run updates the hold of open version pull requests.
+name: Version gates
+
+on:
+  pull_request_target: # zizmor: ignore[dangerous-triggers] the jobs check out only the default branch and read the pull request as data
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+  pull_request_review:
+    types: [submitted, dismissed]
+  schedule:
+    - cron: "41 * * * *"
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: The pull request to check; empty updates the hold of every open version pull request.
+        required: false
+        type: string
+
+permissions: {}
+
+jobs:
+  request:
+    name: Re-check after a review
+    if: github.event_name == 'pull_request_review' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Run the gates for the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: gh workflow run version-gates.yml --repo "$GITHUB_REPOSITORY" --ref "$DEFAULT_BRANCH" -f pr="$PR"
+
+  gates:
+    name: Gates
+    if: github.event_name == 'pull_request_target' || (github.event_name == 'workflow_dispatch' && inputs.pr != '')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: bot
+    permissions:
+      contents: read
+    env:
+      PR: ${{ github.event.pull_request.number || inputs.pr }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    concurrency:
+      group: gates-${{ github.event.pull_request.number || inputs.pr }}
+      cancel-in-progress: true
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: registry
+          permission-actions: read
+          permission-contents: read
+          permission-issues: write
+          permission-members: read
+          permission-pull-requests: write
+          permission-statuses: write
+
+      - name: Fetch the pull request
+        run: git fetch --no-tags origin "refs/pull/$PR/head" "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
+
+      - name: Verify
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
+        run: rshub gate verify --pr "$PR" --registry . --default-branch "origin/$DEFAULT_BRANCH"
+
+      - name: Review
+        if: ${{ !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
+        run: rshub gate review --pr "$PR" --registry . --default-branch "origin/$DEFAULT_BRANCH"
+
+      - name: Hold
+        if: ${{ !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
+        run: rshub gate hold --pr "$PR" --registry . --default-branch "origin/$DEFAULT_BRANCH"
+
+  hold:
+    name: Update holds
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.pr == '')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: bot
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-contents: read
+          permission-pull-requests: read
+          permission-statuses: write
+
+      - name: Update the hold gate of open version pull requests
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          for pr in $(gh pr list --repo "$GITHUB_REPOSITORY" --label version --state open --json number --jq '.[].number'); do
+            git fetch --no-tags origin "refs/pull/$pr/head"
+            rshub gate hold --pr "$pr" --registry . --default-branch "origin/$DEFAULT_BRANCH"
+          done

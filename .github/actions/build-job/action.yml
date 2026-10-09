@@ -1,0 +1,47 @@
+name: Build job
+description: Writes the build job from rshub discover to a file and outputs its fields, each checked against the form it must have.
+
+inputs:
+  job:
+    description: The build job, as JSON.
+    required: true
+
+outputs:
+  file:
+    description: The build job's file, build-info.json.
+    value: ${{ steps.read.outputs.file }}
+  plugin:
+    description: The plugin ID.
+    value: ${{ steps.read.outputs.plugin }}
+  version:
+    description: The version.
+    value: ${{ steps.read.outputs.version }}
+  tag:
+    description: The release tag.
+    value: ${{ steps.read.outputs.tag }}
+  commit:
+    description: The full SHA of the release commit.
+    value: ${{ steps.read.outputs.commit }}
+  repository:
+    description: The plugin's repository as owner/name.
+    value: ${{ steps.read.outputs.repository }}
+
+runs:
+  using: composite
+  steps:
+    - name: Read the build job
+      id: read
+      shell: bash
+      env:
+        JOB: ${{ inputs.job }}
+      run: |
+        file="$RUNNER_TEMP/build-info.json"
+        printf '%s' "$JOB" > "$file"
+        {
+          echo "file=$file"
+          echo "plugin=$(jq -er '.plugin | select(test("^[a-z][a-z0-9-]{1,39}\\.[a-z][a-z0-9-]{1,39}$"))' "$file")"
+          echo "version=$(jq -er '.version | select(test("^[0-9A-Za-z.+-]{5,64}$"))' "$file")"
+          echo "tag=$(jq -er '.tag | select(test("^[0-9A-Za-z._/+-]{1,128}$"))' "$file")"
+          echo "commit=$(jq -er '.commit | select(test("^[0-9a-f]{40}$"))' "$file")"
+          echo "repository=$(jq -er '.repository | select(test("^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$"))' "$file")"
+        } >> "$GITHUB_OUTPUT"

@@ -1,0 +1,120 @@
+# Signs a new moderation list when moderation entries change, withdraws what is hosted for blocked versions, and signs the timestamp,
+# committing to the index branch, which the deploy-index workflow puts on GitHub Pages. The moderate job waits for an administrator's
+# approval.
+name: Moderate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - moderation/**
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: moderate
+  cancel-in-progress: false
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+jobs:
+  moderate:
+    name: Sign the moderation list
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: moderate
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check out the index branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: index
+          path: index
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+        with:
+          cache: "false"
+
+      - name: Install Sleet
+        run: |
+          dotnet tool install sleet --version 7.2.0 --tool-path "$RUNNER_TEMP/sleet"
+          echo "$RUNNER_TEMP/sleet" >> "$GITHUB_PATH"
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: registry,packages
+          permission-contents: write
+
+      - name: Sign the moderation list and commit it to the index branch
+        env:
+          INDEX_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
+          HUB_MODERATION_KEY: ${{ secrets.HUB_MODERATION_KEY }}
+        run: bash .github/scripts/commit-index.sh "Sign a new moderation list" rshub index moderate --registry . --index index/site
+
+      - name: Withdraw the files of blocked versions
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_FEED_URL: ${{ vars.HUB_FEED_URL }}
+          HUB_FEED_ACCOUNT_ID: ${{ vars.HUB_FEED_ACCOUNT_ID }}
+          HUB_FEED_BUCKET: ${{ vars.HUB_FEED_BUCKET }}
+          HUB_FEED_ACCESS_KEY_ID: ${{ secrets.HUB_FEED_ACCESS_KEY_ID }}
+          HUB_FEED_SECRET_ACCESS_KEY: ${{ secrets.HUB_FEED_SECRET_ACCESS_KEY }}
+        run: rshub publish withdraw --registry .
+
+  timestamp:
+    name: Sign the timestamp
+    needs: moderate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: timestamp
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check out the index branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: index
+          path: index
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+        with:
+          cache: "false"
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-contents: write
+
+      - name: Sign the timestamp and commit it to the index branch
+        env:
+          INDEX_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
+          HUB_TIMESTAMP_KEY: ${{ secrets.HUB_TIMESTAMP_KEY }}
+        run: bash .github/scripts/commit-index.sh "Sign a new timestamp" rshub index timestamp --registry . --index index/site

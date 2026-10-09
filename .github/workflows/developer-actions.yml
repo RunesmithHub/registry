@@ -1,0 +1,49 @@
+# Carries out maintainers' requests from the issue forms. The tool checks the issue's author maintains the plugin by permanent ID.
+name: Developer actions
+
+on:
+  issues:
+    types: [opened]
+
+permissions: {}
+
+jobs:
+  act:
+    name: Carry out the request
+    if: >-
+      contains(github.event.issue.labels.*.name, 'yank') || contains(github.event.issue.labels.*.name, 'unyank') ||
+      contains(github.event.issue.labels.*.name, 'deprecate') || contains(github.event.issue.labels.*.name, 'undeprecate') ||
+      contains(github.event.issue.labels.*.name, 'maintainers') || contains(github.event.issue.labels.*.name, 'verification') ||
+      contains(github.event.issue.labels.*.name, 'delete') || contains(github.event.issue.labels.*.name, 'transfer')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: bot
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+
+      - name: Carry out the request
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          ISSUE: ${{ toJSON(github.event.issue) }}
+          AUTHOR_ID: ${{ github.event.issue.user.id }}
+        run: |
+          printf '%s' "$ISSUE" > "$RUNNER_TEMP/issue.json"
+          rshub developer --issue "$RUNNER_TEMP/issue.json" --author-id "$AUTHOR_ID" --registry .

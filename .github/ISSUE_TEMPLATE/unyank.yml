@@ -1,0 +1,20 @@
+name: Un-yank a version
+description: Offer a yanked version again. An administrator approves it.
+title: "Un-yank a version"
+labels: [unyank]
+body:
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 1.4.0
+    validations:
+      required: true

@@ -1,0 +1,30 @@
+name: Change maintainers
+description: Add or remove the GitHub accounts that maintain your plugin. An administrator approves it.
+title: "Change maintainers"
+labels: [maintainers]
+body:
+  - type: markdown
+    attributes:
+      value: Opening this issue as a current maintainer confirms the change. The next version after a change is reviewed.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: textarea
+    id: add
+    attributes:
+      label: Add maintainers
+      description: GitHub logins, one per line. Each needs write access to the repository.
+    validations:
+      required: false
+  - type: textarea
+    id: remove
+    attributes:
+      label: Remove maintainers
+      description: GitHub logins, one per line.
+    validations:
+      required: false

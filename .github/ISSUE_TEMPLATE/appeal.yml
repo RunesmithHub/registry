@@ -1,0 +1,19 @@
+name: Appeal
+description: Ask for a moderation decision about your plugin or publisher to be reviewed again.
+title: "Appeal"
+labels: [appeal]
+body:
+  - type: input
+    id: decision
+    attributes:
+      label: Decision
+      description: A link to the issue or pull request with the decision.
+    validations:
+      required: true
+  - type: textarea
+    id: statement
+    attributes:
+      label: Your statement
+      description: Why the decision should change. A different administrator answers within seven days.
+    validations:
+      required: true

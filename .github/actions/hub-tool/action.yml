@@ -1,0 +1,51 @@
+name: Hub tool
+description: Builds rshub from RunesmithHub/hub at the commit pinned in .github/hub-tool.env and puts it on the PATH.
+
+inputs:
+  cache:
+    description: Whether to reuse an earlier build of the same commit. Jobs that handle untrusted builds pass false.
+    default: "true"
+
+runs:
+  using: composite
+  steps:
+    - name: Read the pinned commit
+      id: pin
+      shell: bash
+      run: |
+        ref="$(sed -n 's/^HUB_TOOL_REF=\([0-9a-f]\{40\}\)$/\1/p' .github/hub-tool.env)"
+        if [ -z "$ref" ]; then
+          echo "::error file=.github/hub-tool.env::HUB_TOOL_REF must be a full commit SHA."
+          exit 1
+        fi
+        echo "ref=$ref" >> "$GITHUB_OUTPUT"
+
+    - name: Check out the hub tool
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        repository: RunesmithHub/hub
+        ref: ${{ steps.pin.outputs.ref }}
+        path: .hub-tool/source
+        persist-credentials: false
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+      with:
+        global-json-file: .hub-tool/source/global.json
+
+    - name: Restore the tool build
+      id: cache
+      if: inputs.cache == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: .hub-tool/bin
+        key: rshub-trusted-${{ runner.os }}-${{ runner.arch }}-${{ steps.pin.outputs.ref }}
+
+    - name: Build the tool
+      if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: dotnet publish .hub-tool/source/src/RunesmithHub.Tool/RunesmithHub.Tool.csproj --configuration Release --output .hub-tool/bin
+
+    - name: Put the tool on the PATH
+      shell: bash
+      run: echo "$GITHUB_WORKSPACE/.hub-tool/bin" >> "$GITHUB_PATH" # zizmor: ignore[github-env] a fixed path inside the workspace

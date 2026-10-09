@@ -1,0 +1,8 @@
+* @RunesmithHub/admins
+
+# Version records have no code owners: the hub/verify, hub/review and hub/hold checks decide when they merge.
+/plugins/*/versions/
+
+/policy/ @RunesmithHub/owners
+/keys/ @RunesmithHub/owners
+/.github/ @RunesmithHub/owners

@@ -1,0 +1,25 @@
+name: Request verification
+description: Ask for your plugin to become verified.
+title: "Request verification"
+labels: [verification]
+body:
+  - type: markdown
+    attributes:
+      value: See the [verification guide](https://hub.runesmith.dev/publish/verification) for what is needed. An administrator replies with the checklist.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Publisher policy
+      options:
+        - label: I accept the hub's publisher policy.
+          required: true
+        - label: Every maintainer uses two-factor authentication on GitHub.
+          required: true

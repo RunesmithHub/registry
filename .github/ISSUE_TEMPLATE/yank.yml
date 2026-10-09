@@ -1,0 +1,30 @@
+name: Yank a version
+description: Withdraw a version of your plugin from new installs.
+title: "Yank a version"
+labels: [yank]
+body:
+  - type: markdown
+    attributes:
+      value: A yanked version stays installed for users who have it; Runesmith suggests a newer one. Only maintainers can use this form.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 1.4.0
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Reason
+      description: Shown with the version, at most 200 characters.
+    validations:
+      required: true

@@ -1,0 +1,16 @@
+name: Publish now
+description: Look for new releases of your plugin right away instead of within the hour.
+title: "Publish now"
+labels: [publish-now]
+body:
+  - type: markdown
+    attributes:
+      value: Create the GitHub release first. Only the plugin's maintainers can use this form.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true

@@ -1,0 +1,46 @@
+# The nightly audit of every registered plugin and of the signed metadata's expiry. Opens an issue for each finding.
+name: Audit
+
+on:
+  schedule:
+    - cron: "7 3 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  HUB_INDEX_URL: https://runesmithhub.github.io/registry/
+
+jobs:
+  audit:
+    name: Audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    environment: bot
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-contents: write
+          permission-issues: write
+          permission-pull-requests: write
+
+      - name: Run the audit
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+        run: rshub audit --registry . --current "$HUB_INDEX_URL"

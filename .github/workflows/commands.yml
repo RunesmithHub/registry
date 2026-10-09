@@ -1,0 +1,59 @@
+# Runs administrator commands written as the first line of a comment, such as /freeze or /approve. The tool checks the commenter is an
+# administrator by permanent ID before it does anything.
+name: Commands
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions: {}
+
+jobs:
+  command:
+    name: Run the command
+    if: startsWith(github.event.comment.body, '/') && github.event.comment.user.type != 'Bot'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: bot
+    permissions:
+      contents: read
+      actions: write
+    concurrency:
+      group: commands
+      cancel-in-progress: false
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0 # zizmor: ignore[github-app] /advisory needs repository advisories, which the action cannot request
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: registry
+
+      - name: Run the command
+        id: command
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          COMMENT: ${{ github.event.comment.body }}
+          ACTOR_ID: ${{ github.event.comment.user.id }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          printf '%s' "$COMMENT" > "$RUNNER_TEMP/comment.md"
+          rshub command --comment "$RUNNER_TEMP/comment.md" --actor-id "$ACTOR_ID" --issue "$ISSUE" --registry .
+
+      - name: Run the gates of the affected pull request
+        if: steps.command.outputs.pull-request != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.command.outputs.pull-request }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: gh workflow run version-gates.yml --repo "$GITHUB_REPOSITORY" --ref "$DEFAULT_BRANCH" -f pr="$PR"

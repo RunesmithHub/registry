@@ -1,0 +1,36 @@
+name: Broken plugin
+description: A plugin breaks Runesmith or loses data, or its developer has not answered a report for 14 days.
+title: "Broken plugin"
+labels: [broken-plugin]
+body:
+  - type: markdown
+    attributes:
+      value: Report ordinary bugs in the plugin's own repository first. For security problems, use private vulnerability reporting instead.
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: report
+    attributes:
+      label: Report in the plugin's repository
+      description: A link to the issue you opened there, if any.
+    validations:
+      required: false

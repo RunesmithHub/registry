@@ -1,0 +1,20 @@
+name: Policy report
+description: A plugin impersonates another, is spam, breaks its license, or has offensive content.
+title: "Policy report"
+labels: [policy]
+body:
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What breaks the policy
+      description: See the publisher policy and the content policy in this repository.
+    validations:
+      required: true

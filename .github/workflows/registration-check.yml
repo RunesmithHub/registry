@@ -1,0 +1,37 @@
+# Checks the publisher and registration files a pull request adds or changes, and passes when there are none, so it can be required. Runs with a read-only token and no secrets, also for forks.
+name: Registration check
+
+on:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: registration-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Registration check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+        with:
+          cache: "false"
+
+      - name: Validate the changed records
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          HUB_PR_AUTHOR_ID: ${{ github.event.pull_request.user.id }}
+          HUB_PR_AUTHOR_LOGIN: ${{ github.event.pull_request.user.login }}
+        run: rshub registration validate --base HEAD^1 --head .

@@ -1,0 +1,13 @@
+name: Undeprecate a plugin
+description: List a deprecated plugin as maintained again.
+title: "Undeprecate a plugin"
+labels: [undeprecate]
+body:
+  - type: input
+    id: plugin
+    attributes:
+      label: Plugin ID
+      description: The plugin's ID, such as lumen.todo.
+      placeholder: publisher.name
+    validations:
+      required: true

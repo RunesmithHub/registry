@@ -1,0 +1,118 @@
+# Finds new releases of registered plugins every hour, and right away for a maintainer's publish-now issue, and builds each one.
+name: Discover
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  issues:
+    types: [opened]
+
+permissions: {}
+
+concurrency:
+  group: discover
+  cancel-in-progress: false
+
+jobs:
+  request:
+    name: Publish-now request
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'publish-now')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: bot
+    permissions:
+      contents: read
+    outputs:
+      plugin: ${{ steps.request.outputs.plugin }}
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-issues: write
+
+      - name: Check the request
+        id: request
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          ISSUE: ${{ toJSON(github.event.issue) }}
+          AUTHOR_ID: ${{ github.event.issue.user.id }}
+        run: |
+          printf '%s' "$ISSUE" > "$RUNNER_TEMP/issue.json"
+          rshub developer --issue "$RUNNER_TEMP/issue.json" --author-id "$AUTHOR_ID" --registry .
+
+  discover:
+    name: Discover releases
+    needs: request
+    if: ${{ !cancelled() && (github.event_name != 'issues' || needs.request.outputs.plugin != '') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: bot
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.discover.outputs.matrix }}
+      count: ${{ steps.discover.outputs.count }}
+    steps:
+      - name: Check out the registry
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the hub tool
+        uses: ./.github/actions/hub-tool
+
+      - name: Restore the conditional-request cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ runner.temp }}/github-cache.json
+          key: discover-${{ github.run_id }}
+          restore-keys: discover-
+
+      - name: Get the bot's token
+        id: app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-issues: write
+          permission-contents: read
+
+      - name: Discover new releases
+        id: discover
+        env:
+          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          HUB_GITHUB_CACHE: ${{ runner.temp }}/github-cache.json
+          PLUGIN: ${{ needs.request.outputs.plugin }}
+        run: |
+          if [ -n "$PLUGIN" ]; then
+            rshub discover --registry . --plugin "$PLUGIN"
+          else
+            rshub discover --registry .
+          fi
+
+  build:
+    name: Build ${{ matrix.plugin }} ${{ matrix.version }}
+    needs: discover
+    if: ${{ !cancelled() && needs.discover.result == 'success' && needs.discover.outputs.count != '0' }}
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.discover.outputs.matrix) }}
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/build.yml
+    with:
+      job: ${{ toJSON(matrix) }}

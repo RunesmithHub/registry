@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/RunesmithHub/registry/security/advisories/new
+    about: Report malicious or vulnerable plugins privately. Never open a public issue for them.
+  - name: Publishing guide
+    url: https://hub.runesmith.dev/publish
+    about: How to register a plugin and release versions.
