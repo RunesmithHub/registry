@@ -1,0 +1,144 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "2d12ae397b23e2a0a3b05889d422d45a8482d322",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/runesmith.gitea-0.1.0.rsplugin"
+    ],
+    "sha256": "16c2a8a0c6a1f7c097f663d43a126efdc7aeaec65050c32914c5a2517a6bacfb",
+    "length": 219951
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/runesmith.gitea-0.1.0.source.tar.gz"
+    ],
+    "sha256": "419f573d8c83671e1917308ac75ccbac413a73a51a61bcc743ad3018f220b2a3",
+    "length": 133828
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/runesmith.gitea-0.1.0.cdx.json"
+    ],
+    "sha256": "7ba7fe3927530aa7f48e352eab5ebb290415be16f411fdb1cd767f301d5e8e74",
+    "length": 5685
+  },
+  "contracts": {
+    "assembly": "Runesmith.Gitea.Contracts.dll",
+    "sha256": "fd7e60d7b0ecfcb3d0eed519be81bc147c7d4a25ef345b87f2431c909b1cbe7a",
+    "package": "RunesmithHub.Runesmith.Gitea.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.1.0 <0.2.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Talks to the Gitea and Forgejo servers you add to sign you in and list repositories."
+      },
+      {
+        "id": "credentials",
+        "reason": "Keeps your Gitea and Forgejo sign-ins in your system's secret store."
+      },
+      {
+        "id": "process",
+        "reason": "Opens your Gitea or Forgejo server in your browser to sign in."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Remembers the accounts you added and caches avatars."
+      },
+      {
+        "id": "environment",
+        "reason": "Reads a variable that points it at a test server during development."
+      }
+    ],
+    "detected": [
+      "credentials",
+      "environment",
+      "filesystem",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "gitea.com",
+    "codeberg.org",
+    "*"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "heuristic",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/37995592428",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The first release of Gitea and Forgejo on the Runesmith Hub.",
+  "summary": "Sign in to gitea.com, Codeberg and other Gitea and Forgejo servers, clone from your accounts and open links.",
+  "name": "Gitea and Forgejo",
+  "categories": [
+    "Version control",
+    "Cloud and remote"
+  ],
+  "keywords": [
+    "gitea",
+    "forgejo",
+    "codeberg",
+    "clone"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/9",
+  "trackingIssue": 9,
+  "buildRun": 37995592428,
+  "analysisDigest": "3cf4a88f99ac8b74a57d48c65d6de5e27fa153912009c2c62331919e9f8d4038",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.gitea%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Gitea.Contracts.0.1.0.nupkg",
+      "sha256": "8313c66e617c84446fcf0e83ed8275fde312c0089ab0770f89596491320cfc00",
+      "length": 3092
+    }
+  }
+}
