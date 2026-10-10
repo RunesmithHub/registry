@@ -121,7 +121,7 @@ jobs:
       - name: Upload the build output
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: ${{ matrix.output }}
+          name: ${{ matrix.output }}-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
           path: output
 
   compare:
@@ -140,11 +140,23 @@ jobs:
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
 
-      - name: Download both builds
+      - name: Read the build job
+        id: job
+        uses: ./.github/actions/build-job
+        with:
+          job: ${{ inputs.job }}
+
+      - name: Download the first build
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: "{package,rebuild}"
-          path: builds
+          name: package-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
+          path: builds/package
+
+      - name: Download the second build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: rebuild-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
+          path: builds/rebuild
 
       - name: Compare the file hashes
         run: rshub build compare builds/package/hashes.json builds/rebuild/hashes.json
@@ -184,7 +196,7 @@ jobs:
       - name: Download the build output
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          name: package
+          name: package-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
           path: package
 
       - name: Download the previous version
@@ -222,7 +234,7 @@ jobs:
       - name: Upload the public analysis
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: analysis
+          name: analysis-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
           path: |
             analysis/analysis.json
             analysis/summary.md
@@ -232,7 +244,7 @@ jobs:
       - name: Upload the sealed review findings
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: private-findings
+          name: private-findings-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
           path: analysis/private-findings.sealed.json
           retention-days: 7
           if-no-files-found: ignore
@@ -255,11 +267,23 @@ jobs:
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
 
-      - name: Download the analysis and the build output
+      - name: Read the build job
+        id: job
+        uses: ./.github/actions/build-job
+        with:
+          job: ${{ inputs.job }}
+
+      - name: Download the analysis
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: "{analysis,package}"
-          path: results
+          name: analysis-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
+          path: results/analysis
+
+      - name: Download the build output
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: package-${{ steps.job.outputs.plugin }}-${{ steps.job.outputs.version }}
+          path: results/package
 
       - name: Get the bot's token
         id: app
