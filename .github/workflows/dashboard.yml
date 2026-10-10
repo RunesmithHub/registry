@@ -24,6 +24,8 @@ jobs:
     environment: bot
     permissions:
       contents: read
+    outputs:
+      bot-login: ${{ steps.app.outputs.app-slug }}[bot]
     steps:
       - name: Check out the registry
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -94,6 +96,7 @@ jobs:
       - name: Commit the dashboard to the index branch
         env:
           INDEX_DEPLOY_KEY: ${{ secrets.HUB_INDEX_DEPLOY_KEY }}
+          HUB_BOT_LOGIN: ${{ needs.build.outputs.bot-login }}
           DASHBOARD: ${{ runner.temp }}/dashboard/dashboard.json
         run: |
           test -f "$DASHBOARD" && test ! -L "$DASHBOARD"
