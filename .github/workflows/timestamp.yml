@@ -40,8 +40,6 @@ jobs:
 
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
-        with:
-          cache: "false"
 
       - name: Get the bot's token
         id: app

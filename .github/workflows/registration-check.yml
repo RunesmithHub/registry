@@ -26,8 +26,6 @@ jobs:
 
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
-        with:
-          cache: "false"
 
       - name: Validate the changed records
         env:

@@ -43,8 +43,6 @@ jobs:
 
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
-        with:
-          cache: "false"
 
       - name: Read the build job
         id: job
@@ -61,7 +59,7 @@ jobs:
           persist-credentials: false
           submodules: false
 
-      - name: Validate the source and plan the build
+      - name: Validate the source, plan the build and archive the source
         id: plan
         env:
           PLUGIN: ${{ steps.job.outputs.plugin }}
@@ -75,13 +73,14 @@ jobs:
         env:
           DOTNET_SDK: ${{ steps.plan.outputs.dotnet-sdk }}
         run: |
-          actual="$(docker run --rm "$SDK_IMAGE" dotnet --version)"
+          actual="$(docker run --rm --network none --cap-drop ALL --security-opt no-new-privileges --pids-limit 4096 --read-only --tmpfs /tmp \
+            "$SDK_IMAGE" dotnet --version)"
           if [ "$actual" != "$DOTNET_SDK" ]; then
             echo "::error::The build image has .NET SDK $actual, but the plan needs $DOTNET_SDK. Update SDK_IMAGE."
             exit 1
           fi
 
-      # Plugin code runs only inside these containers; the build has no network, and neither can change the Git data or the hub tool.
+      # From here on only containers read the plugin's folder; the runner only uploads the regular files of the output folder.
       - name: Restore in a container
         env:
           ROOT: ${{ steps.plan.outputs.plugin-root }}
@@ -89,11 +88,17 @@ jobs:
           PROPERTIES: ${{ steps.plan.outputs.properties }}
         run: |
           mkdir -p "$RUNNER_TEMP/nuget"
-          docker run --rm --user "$(id -u):$(id -g)" --env HOME=/tmp --env DOTNET_CLI_TELEMETRY_OPTOUT=1 --env DOTNET_NOLOGO=1 \
+          token="$(openssl rand -hex 16)"
+          echo "::stop-commands::$token"
+          status=0
+          docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 4096 --read-only --tmpfs /tmp:exec \
+            --env HOME=/tmp --env DOTNET_CLI_TELEMETRY_OPTOUT=1 --env DOTNET_NOLOGO=1 \
             --env NUGET_PACKAGES="$RUNNER_TEMP/nuget" --volume "$RUNNER_TEMP/nuget:$RUNNER_TEMP/nuget" \
             --volume "$PWD/plugin:$PWD/plugin" --volume "$PWD/plugin/.git:$PWD/plugin/.git:ro" \
             --volume "$RUNNER_TEMP/hub-build:$RUNNER_TEMP/hub-build:ro" --workdir "$ROOT" \
-            "$SDK_IMAGE" dotnet restore "$PROJECT" "@$PROPERTIES"
+            "$SDK_IMAGE" dotnet restore "$PROJECT" "@$PROPERTIES" || status=$?
+          echo "::$token::"
+          exit "$status"
 
       - name: Build in a container without network
         env:
@@ -101,22 +106,48 @@ jobs:
           PROJECT: ${{ steps.plan.outputs.implementation }}
           PROPERTIES: ${{ steps.plan.outputs.properties }}
         run: |
-          docker run --rm --network none --user "$(id -u):$(id -g)" --env HOME=/tmp --env DOTNET_CLI_TELEMETRY_OPTOUT=1 --env DOTNET_NOLOGO=1 \
+          token="$(openssl rand -hex 16)"
+          echo "::stop-commands::$token"
+          status=0
+          docker run --rm --network none --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 4096 --read-only --tmpfs /tmp:exec \
+            --env HOME=/tmp --env DOTNET_CLI_TELEMETRY_OPTOUT=1 --env DOTNET_NOLOGO=1 \
             --env NUGET_PACKAGES="$RUNNER_TEMP/nuget" --volume "$RUNNER_TEMP/nuget:$RUNNER_TEMP/nuget:ro" \
             --volume "$PWD/plugin:$PWD/plugin" --volume "$PWD/plugin/.git:$PWD/plugin/.git:ro" \
             --volume "$RUNNER_TEMP/hub-build:$RUNNER_TEMP/hub-build:ro" --workdir "$ROOT" \
-            "$SDK_IMAGE" dotnet build "$PROJECT" --no-restore "@$PROPERTIES"
+            "$SDK_IMAGE" dotnet build "$PROJECT" --no-restore "@$PROPERTIES" || status=$?
+          echo "::$token::"
+          exit "$status"
 
-      - name: Assemble the package
+      # The hub tool reads the feeds to check bundled files against their packages, so this container has network access but no secrets.
+      - name: Assemble the package in a container
         env:
           PLUGIN: ${{ steps.job.outputs.plugin }}
           COMMIT: ${{ steps.job.outputs.commit }}
           ROOT: ${{ steps.plan.outputs.plugin-root }}
           DOTNET_SDK: ${{ steps.plan.outputs.dotnet-sdk }}
+          SOURCE_ARCHIVE: ${{ steps.plan.outputs.source-archive }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          rshub build package --source "$ROOT" --output output --commit "$COMMIT" --run "$RUN_URL" \
-            --registration "plugins/$PLUGIN/registration.json" --sdk "$DOTNET_SDK"
+          mkdir output
+          docker run --rm --user "$(id -u):$(id -g)" --cap-drop ALL --security-opt no-new-privileges --pids-limit 4096 --read-only --tmpfs /tmp \
+            --env HOME=/tmp --env DOTNET_CLI_TELEMETRY_OPTOUT=1 --env DOTNET_NOLOGO=1 --env GITHUB_ACTIONS=true --env HUB_FEED_URL \
+            --volume "$GITHUB_WORKSPACE/.hub-tool/bin:/opt/rshub:ro" \
+            --volume "$PWD/plugin:$PWD/plugin:ro" --volume "$RUNNER_TEMP/nuget:$RUNNER_TEMP/nuget:ro" \
+            --volume "$RUNNER_TEMP/hub-build:$RUNNER_TEMP/hub-build:ro" \
+            --volume "$PWD/plugins/$PLUGIN/registration.json:/hub/registration.json:ro" \
+            --volume "$PWD/output:/hub/output" --workdir "$ROOT" \
+            "$SDK_IMAGE" dotnet /opt/rshub/rshub.dll build package --source "$ROOT" --output /hub/output --commit "$COMMIT" --run "$RUN_URL" \
+              --registration /hub/registration.json --sdk "$DOTNET_SDK" --source-archive "$SOURCE_ARCHIVE"
+          if [ -n "$(find output -mindepth 1 ! -type f ! -type d -print -quit)" ]; then
+            echo "::error::The build output may hold only regular files and folders."
+            exit 1
+          fi
+
+      - name: Remove the plugin's folder
+        if: ${{ always() }}
+        run: |
+          chmod -R u+rwX plugin 2>/dev/null || true
+          rm -rf plugin
 
       - name: Upload the build output
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

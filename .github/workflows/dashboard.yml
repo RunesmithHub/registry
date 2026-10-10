@@ -46,13 +46,21 @@ jobs:
         with:
           app-id: ${{ vars.HUB_BOT_APP_ID }}
           private-key: ${{ secrets.HUB_BOT_KEY }}
-          permission-contents: write
+          permission-contents: read
           permission-issues: read
           permission-pull-requests: read
+
+      - name: Get the bot's token for the index branch
+        id: index-app
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          permission-contents: write
 
       - name: Write the dashboard and commit it to the index branch
         env:
           GITHUB_TOKEN: ${{ steps.app.outputs.token }}
-          INDEX_TOKEN: ${{ steps.app.outputs.token }}
+          INDEX_TOKEN: ${{ steps.index-app.outputs.token }}
           HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
         run: bash .github/scripts/commit-index.sh "Update the dashboard" rshub dashboard --registry . --index index/site
