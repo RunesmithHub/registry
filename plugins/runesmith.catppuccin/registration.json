@@ -1,0 +1,18 @@
+{
+  "id": "runesmith.catppuccin",
+  "repository": {
+    "id": 1412890518,
+    "url": "https://github.com/RunesmithHub/plugin-catppuccin",
+    "path": ".",
+    "tagPrefix": "v"
+  },
+  "maintainers": [
+    {
+      "id": 59077048,
+      "login": "DutchyD"
+    }
+  ],
+  "tier": "official",
+  "state": "registered",
+  "registeredAt": "2026-10-10T07:16:13Z"
+}
