@@ -1,10 +1,5 @@
 name: Hub tool
-description: Builds rshub from RunesmithHub/hub at the commit pinned in .github/hub-tool.env and puts it on the PATH.
-
-inputs:
-  cache:
-    description: Whether to reuse an earlier build of the same commit. Jobs that handle untrusted builds pass false.
-    default: "true"
+description: Builds rshub from RunesmithHub/hub at the commit pinned in .github/hub-tool.env, which must be on the hub's main branch, and puts it on the PATH.
 
 runs:
   using: composite
@@ -26,23 +21,25 @@ runs:
         repository: RunesmithHub/hub
         ref: ${{ steps.pin.outputs.ref }}
         path: .hub-tool/source
+        fetch-depth: 0
         persist-credentials: false
+
+    - name: Check the pinned commit is on the hub's main branch
+      shell: bash
+      env:
+        REF: ${{ steps.pin.outputs.ref }}
+      run: |
+        if ! git -C .hub-tool/source merge-base --is-ancestor "$REF" refs/remotes/origin/main; then
+          echo "::error file=.github/hub-tool.env::HUB_TOOL_REF $REF is not on the main branch of RunesmithHub/hub."
+          exit 1
+        fi
 
     - name: Set up .NET
       uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
       with:
         global-json-file: .hub-tool/source/global.json
 
-    - name: Restore the tool build
-      id: cache
-      if: inputs.cache == 'true'
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-      with:
-        path: .hub-tool/bin
-        key: rshub-trusted-${{ runner.os }}-${{ runner.arch }}-${{ steps.pin.outputs.ref }}
-
     - name: Build the tool
-      if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: dotnet publish .hub-tool/source/src/RunesmithHub.Tool/RunesmithHub.Tool.csproj --configuration Release --output .hub-tool/bin
 

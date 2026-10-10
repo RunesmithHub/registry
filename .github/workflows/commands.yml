@@ -30,8 +30,45 @@ jobs:
       - name: Build the hub tool
         uses: ./.github/actions/hub-tool
 
+      - name: Choose the token's permissions for the command
+        id: verb
+        env:
+          COMMENT: ${{ github.event.comment.body }}
+        run: |
+          verb="$(printf '%s\n' "$COMMENT" | tr -d '\r' | sed -n 's|^[[:space:]]*\(/[^[:space:]]*\).*|\1|p' | head -n 1)"
+          contents=""
+          pulls=""
+          advisory=false
+          case "$verb" in
+            /approve) pulls="read" ;;
+            /reject) pulls="write" ;;
+            /review) contents="write"; pulls="read" ;;
+            /freeze | /unfreeze | /block | /unblock | /delete | /verify | /unverify | /suspend | /unsuspend) contents="write"; pulls="write" ;;
+            /advisory) advisory=true ;;
+          esac
+          {
+            echo "contents=$contents"
+            echo "pull-requests=$pulls"
+            echo "advisory=$advisory"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Get the bot's token
         id: app
+        if: steps.verb.outputs.advisory != 'true'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.HUB_BOT_APP_ID }}
+          private-key: ${{ secrets.HUB_BOT_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: registry
+          permission-members: read
+          permission-issues: write
+          permission-contents: ${{ steps.verb.outputs.contents }}
+          permission-pull-requests: ${{ steps.verb.outputs.pull-requests }}
+
+      - name: Get the bot's token for an advisory
+        id: advisory
+        if: steps.verb.outputs.advisory == 'true'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0 # zizmor: ignore[github-app] /advisory needs repository advisories, which the action cannot request
         with:
           app-id: ${{ vars.HUB_BOT_APP_ID }}
@@ -42,7 +79,7 @@ jobs:
       - name: Run the command
         id: command
         env:
-          GITHUB_TOKEN: ${{ steps.app.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.app.outputs.token || steps.advisory.outputs.token }}
           COMMENT: ${{ github.event.comment.body }}
           ACTOR_ID: ${{ github.event.comment.user.id }}
           ISSUE: ${{ github.event.issue.number }}
