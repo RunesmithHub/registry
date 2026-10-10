@@ -80,6 +80,7 @@ jobs:
       - name: Sign the moderation list and commit it to the index branch
         env:
           INDEX_TOKEN: ${{ steps.index-app.outputs.token }}
+          INDEX_DEPLOY_KEY: ${{ secrets.HUB_INDEX_DEPLOY_KEY }}
           HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
           HUB_MODERATION_KEY: ${{ secrets.HUB_MODERATION_KEY }}
         run: bash .github/scripts/commit-index.sh "Sign a new moderation list" rshub index moderate --registry . --index index/site
@@ -132,6 +133,7 @@ jobs:
       - name: Sign the timestamp and commit it to the index branch
         env:
           INDEX_TOKEN: ${{ steps.app.outputs.token }}
+          INDEX_DEPLOY_KEY: ${{ secrets.HUB_INDEX_DEPLOY_KEY }}
           HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
           HUB_TIMESTAMP_KEY: ${{ secrets.HUB_TIMESTAMP_KEY }}
         run: bash .github/scripts/commit-index.sh "Sign a new timestamp" rshub index timestamp --registry . --index index/site

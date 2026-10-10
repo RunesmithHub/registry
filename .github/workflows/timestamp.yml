@@ -52,6 +52,7 @@ jobs:
       - name: Re-sign the timestamp and commit it to the index branch
         env:
           INDEX_TOKEN: ${{ steps.app.outputs.token }}
+          INDEX_DEPLOY_KEY: ${{ secrets.HUB_INDEX_DEPLOY_KEY }}
           HUB_BOT_LOGIN: ${{ steps.app.outputs.app-slug }}[bot]
           HUB_TIMESTAMP_KEY: ${{ secrets.HUB_TIMESTAMP_KEY }}
         run: bash .github/scripts/commit-index.sh "Refresh the timestamp" rshub index refresh --registry . --index index/site
