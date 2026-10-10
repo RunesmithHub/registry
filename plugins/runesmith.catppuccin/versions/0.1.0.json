@@ -1,0 +1,113 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "7e484056eae7ff2c3f6cd1a7bae0a89a49b9f485",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/runesmith.catppuccin-0.1.0.rsplugin"
+    ],
+    "sha256": "092287149b5d8a8fdd92cd99827b6301f20eaa1e436c0cbedb7cf6d4c7eb09f6",
+    "length": 46535
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/runesmith.catppuccin-0.1.0.source.tar.gz"
+    ],
+    "sha256": "679d8f26267264f7eb22e7820ce2180a33f54d532905dd03111b73be184bf5b3",
+    "length": 43959
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/runesmith.catppuccin-0.1.0.cdx.json"
+    ],
+    "sha256": "0d1a39fe3e611f0d506f476eb879e5b1ace26fc4febae67d4adf2072ed97066c",
+    "length": 5700
+  },
+  "contracts": {
+    "assembly": "Runesmith.Catppuccin.Contracts.dll",
+    "sha256": "fd4827bc1f774beb7a70db5054c439acb3a6c0b2e3040ef3e4d243eced818906",
+    "package": "RunesmithHub.Runesmith.Catppuccin.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.1.1 <0.2.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "heuristic",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38037033890",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The first release of Catppuccin Themes on the Runesmith Hub: Latte, Frappé, Macchiato and Mocha as color themes with matching syntax colors.",
+  "summary": "The Catppuccin color themes and syntax colors: Latte, Frappé, Macchiato and Mocha.",
+  "name": "Catppuccin Themes",
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "catppuccin",
+    "theme",
+    "dark",
+    "light",
+    "pastel"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/26",
+  "trackingIssue": 26,
+  "buildRun": 38037033890,
+  "analysisDigest": "91b8c1de5c2c172b0a3adf3ad98f33ab0a105333cabcb3c54d6555030d683731",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/icon-64.png",
+        "sha256": "38b7e22fa7a7c9ff4177d0ae2375e69e63c2fdf6df300feafcb1e5e7450649cd",
+        "length": 1572,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/icon-128.png",
+        "sha256": "d2ce11f30e8e39dccf252202c54b886706678aa50bddf6a7c953d124024cfaee",
+        "length": 4028,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.catppuccin%400.1.0/icon-256.png",
+        "sha256": "5767789117ae24a069009f202744f4bf15cf6e49197d6767d3e82f19f3adc372",
+        "length": 11560,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Catppuccin.Contracts.0.1.0.nupkg",
+      "sha256": "ff8dd859ae55aae4339fc576df99b856acb397b8f9bbd8a03feb9156cb784e28",
+      "length": 3134
+    }
+  }
+}
