@@ -1,0 +1,18 @@
+{
+  "id": "runesmith.dutch",
+  "repository": {
+    "id": 1414417783,
+    "url": "https://github.com/RunesmithHub/plugin-dutch",
+    "path": ".",
+    "tagPrefix": "v"
+  },
+  "maintainers": [
+    {
+      "id": 59077048,
+      "login": "DutchyD"
+    }
+  ],
+  "tier": "official",
+  "state": "registered",
+  "registeredAt": "2026-10-11T14:21:29Z"
+}
