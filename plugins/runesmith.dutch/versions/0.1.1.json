@@ -1,0 +1,124 @@
+{
+  "version": "0.1.1",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "ecfadb1ff7f8ef49a9a194df31136d26b593529a",
+  "tag": "v0.1.1",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/runesmith.dutch-0.1.1.rsplugin"
+    ],
+    "sha256": "cf07b77028351523356594a40e11abdd34e234b0d62dd1a6a5d57325e8c86707",
+    "length": 87357
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/runesmith.dutch-0.1.1.source.tar.gz"
+    ],
+    "sha256": "e1b00fda0a104df44b01aaec663dbcfbcbbde0254cbd0ab95f6cfdbe8d58f555",
+    "length": 129935
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/runesmith.dutch-0.1.1.cdx.json"
+    ],
+    "sha256": "b6ce7e656e2ab1af23ba71ed45a2526dfa55e12a8e8ea8f3874fcded10e791f1",
+    "length": 5156
+  },
+  "contracts": {
+    "assembly": "Runesmith.Dutch.Contracts.dll",
+    "sha256": "ec01909e562ebe76c26c0c994d0fdebcd7af15fee1d61f81b3603c997292f83b",
+    "package": "RunesmithHub.Runesmith.Dutch.Contracts",
+    "packageVersion": "0.1.1"
+  },
+  "runesmithApi": ">=0.1.3 <0.2.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38159283921",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Translates what each capability allows, which Runesmith 0.1.1 shows in the chosen language. The badge of a plugin that waits for a restart is shorter, so it fits beside the plugin page.\n\nNeeds a Runesmith with plugin API 0.1.3, such as Runesmith 0.1.1.",
+  "summary": "Runesmith and its official plugins in Dutch (Nederlands).",
+  "name": "Dutch Language Pack",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "dutch",
+    "nederlands",
+    "language-pack",
+    "translation",
+    "localization"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/62",
+  "languagePack": {
+    "language": "nl",
+    "name": "Nederlands",
+    "englishName": "Dutch",
+    "targets": [
+      "runesmith",
+      "runesmith.csharp",
+      "runesmith.git",
+      "runesmith.gitea",
+      "runesmith.github",
+      "runesmith.java"
+    ]
+  },
+  "trackingIssue": 62,
+  "buildRun": 38159283921,
+  "analysisDigest": "9ff05e9df352ac770fc36cc9272588d2e2f50025f407aba737180c354633e81d",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/icon-64.png",
+        "sha256": "d7fbbe98c07f07682ec621977360a0629538e7cb2bdee4e84e44fd071739c315",
+        "length": 4546,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/icon-128.png",
+        "sha256": "ddad67a54d29a5e32f197c56efa99ad042ccefec9578d3ca91a9f8687eb64684",
+        "length": 15431,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.1.1/icon-256.png",
+        "sha256": "f4fdf77dae8c43da60116620bc6bc0a2482fad14b366726b075d19e03d1e81fb",
+        "length": 53847,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Dutch.Contracts.0.1.1.nupkg",
+      "sha256": "e1d9c2df3dc58e40eaa4f78f231a43bdf09dfbbb19f604a1924f7e8d34ad3f91",
+      "length": 2558
+    }
+  }
+}
