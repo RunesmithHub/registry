@@ -1,0 +1,114 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "ae17bbad23ad89585e13055a7591e20c4d9fa5a3",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/runesmith.documents-0.1.0.rsplugin"
+    ],
+    "sha256": "291ab6a607461e5eb7483e0d96db05528ca94547c408ec3ad0040f9c7a265714",
+    "length": 53648
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/runesmith.documents-0.1.0.source.tar.gz"
+    ],
+    "sha256": "09bf47dabad5ded4d00bd7fa4a97f427358396ec772fe41ececdc9f3a42a1c94",
+    "length": 162577
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/runesmith.documents-0.1.0.cdx.json"
+    ],
+    "sha256": "2d8bfa4cd84c3bdda4de1e4329ca6daf60cd3e3161f1bc99dc6f5fbb2561b6fb",
+    "length": 5697
+  },
+  "contracts": {
+    "assembly": "Runesmith.Documents.Contracts.dll",
+    "sha256": "a85491cec5df095f96e7c1cc8f10ff704f4a6fb3c93605fb655ba5432a794fc7",
+    "package": "RunesmithHub.Runesmith.Documents.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Highlighting, comments and brackets for TeX, LaTeX, BibTeX, Asciidoc and Typst.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "Highlighting, comments and brackets for TeX, LaTeX, BibTeX, Asciidoc and Typst.",
+  "name": "Document Languages",
+  "categories": [
+    "Languages"
+  ],
+  "keywords": [
+    "tex",
+    "ltx",
+    "bib",
+    "sty",
+    "cls",
+    "adoc",
+    "typ"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/77",
+  "trackingIssue": 77,
+  "buildRun": 38269665520,
+  "analysisDigest": "b3f13e26144c6d9fa0f8d6e71db933b580a86bcc6cf4f37b8099b71f2c91d74c",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.documents%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Documents.Contracts.0.1.0.nupkg",
+      "sha256": "b5686808671ddc93e848b967c0979d071a0f3a3beb76c3aec3b13d37cf1ffb88",
+      "length": 3128
+    }
+  }
+}
