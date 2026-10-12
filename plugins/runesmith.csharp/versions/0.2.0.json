@@ -1,0 +1,159 @@
+{
+  "version": "0.2.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "d593e9c8dbcc7cde36bfdb554f1cf72e60f8109c",
+  "tag": "v0.2.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/runesmith.csharp-0.2.0.rsplugin"
+    ],
+    "sha256": "5fbaf6af6a6531e2ce3e904439b5c46e40bcf68415681971cb1da8b228fab542",
+    "length": 10612007
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/runesmith.csharp-0.2.0.source.tar.gz"
+    ],
+    "sha256": "e214624fa26d4491c50ae44974f74e9820855fd4906355fbe65f948b7e2d5025",
+    "length": 225361
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/runesmith.csharp-0.2.0.cdx.json"
+    ],
+    "sha256": "ffaa3395eff26f79464c009a8d9a2c23f54e0c0cbdbbbd0f4feb039809468a14",
+    "length": 22527
+  },
+  "contracts": {
+    "assembly": "Runesmith.CSharp.Contracts.dll",
+    "sha256": "46d689d7fa4d56ec51caf1bcc0966516533774a3193f2a8f9cc4c6bcba73b5fe",
+    "package": "RunesmithHub.Runesmith.CSharp.Contracts",
+    "packageVersion": "0.2.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Downloads the .NET SDKs you choose to install, and the netcoredbg debugger from GitHub the first time you debug."
+      },
+      {
+        "id": "process",
+        "reason": "Runs dotnet to build, run and test your projects and to load them for the C# analyzer, and starts netcoredbg to debug them."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Reads your projects' build files and keeps the .NET SDKs it installs."
+      },
+      {
+        "id": "environment",
+        "reason": "Finds the .NET SDKs on your PATH and in DOTNET_ROOT."
+      },
+      {
+        "id": "native",
+        "reason": "The MSBuild library the C# analyzer uses to load your projects calls into the operating system."
+      },
+      {
+        "id": "dynamic-code",
+        "reason": "The C# compiler services it hosts load their own components when they start."
+      }
+    ],
+    "detected": [
+      "dynamic-code",
+      "environment",
+      "filesystem",
+      "native",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "builds.dotnet.microsoft.com",
+    "github.com",
+    "release-assets.githubusercontent.com"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "dynamic-code",
+      "native-code",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The plugin brings the grammars of C#, Razor, F# and Visual Basic, links .NET stack frames in the Run console and the terminal, leaves `bin`, `obj` and `.vs` out of the Explorer and search, and gives the SDKs page its .NET texts.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "C# highlighting, completion, navigation and problems, building, running and debugging with dotnet, and SDK downloads.",
+  "name": "C#",
+  "categories": [
+    "Languages",
+    "Build and run",
+    "Debugging"
+  ],
+  "keywords": [
+    "csharp",
+    "cs",
+    "csx",
+    "csproj",
+    "sln",
+    "slnx",
+    "razor",
+    "fs",
+    "vb",
+    "dotnet"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/74",
+  "languages": [
+    "en"
+  ],
+  "trackingIssue": 74,
+  "buildRun": 38269665520,
+  "analysisDigest": "ae0571df146da5395863a2b8cbe8f75c3415377ed525ed76069ad4b210290e23",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp%400.2.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.CSharp.Contracts.0.2.0.nupkg",
+      "sha256": "4bd689997cf601db88589329439ff6cc174790e7c8b9dde101dfb39197771166",
+      "length": 3083
+    }
+  }
+}
