@@ -1,0 +1,126 @@
+{
+  "version": "0.2.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "165876bf34e0ffc116ec0da2ac35c469a7a5db62",
+  "tag": "v0.2.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/runesmith.csharp-templates-0.2.0.rsplugin"
+    ],
+    "sha256": "4050d225666117b6fcb432c6e305584eb600087c7a3b0d9d051b6f2c935882ad",
+    "length": 83781
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/runesmith.csharp-templates-0.2.0.source.tar.gz"
+    ],
+    "sha256": "6aa90cf250ea3dee9cdc074effa54499272cfde1a63826b91da14fe0634cbc69",
+    "length": 95804
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/runesmith.csharp-templates-0.2.0.cdx.json"
+    ],
+    "sha256": "a7e129a1e9fcb92a8473fb4f9e41aa551b143f1fba8ec82cba1745a26a4d78b1",
+    "length": 5718
+  },
+  "contracts": {
+    "assembly": "Runesmith.CSharp.Templates.Contracts.dll",
+    "sha256": "8ea17d1e9f6b406beae38a466ee6804d7e7df689aec865f8143f23c465eafabf",
+    "package": "RunesmithHub.Runesmith.CSharp.Templates.Contracts",
+    "packageVersion": "0.2.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "process",
+        "reason": "Runs dotnet new to create your projects."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Reads the template packages of your .NET SDKs and the ones you installed."
+      },
+      {
+        "id": "environment",
+        "reason": "Finds your .NET SDK and template packages through PATH, DOTNET_ROOT and your home folder."
+      }
+    ],
+    "detected": [
+      "environment",
+      "filesystem",
+      "process"
+    ]
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Built for plugin API 0.2.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "New C#, F# and Visual Basic projects from the .NET SDK's templates and the template packages you installed.",
+  "name": "C# templates",
+  "categories": [
+    "Snippets and templates"
+  ],
+  "keywords": [
+    "csharp",
+    "dotnet",
+    "templates"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/75",
+  "trackingIssue": 75,
+  "buildRun": 38269665520,
+  "analysisDigest": "9db2d1a43b54e86aec8d65c5bfd95d3d64bfe107244b2b96fabd6318d8e300e6",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.csharp-templates%400.2.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.CSharp.Templates.Contracts.0.2.0.nupkg",
+      "sha256": "5056a9241e743ce498844e63a90cd0cf8fe2e5bba07cca5d93a3a33f68348c53",
+      "length": 3191
+    }
+  }
+}
