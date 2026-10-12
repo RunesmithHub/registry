@@ -1,0 +1,112 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "c819a0dd57e2c3e52e26d4718a146a8262c63ed6",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/runesmith.compiled-0.1.0.rsplugin"
+    ],
+    "sha256": "3b029fc0478c24359aa1d782d55c262c8a6e19e5f69e934542eced6be34af021",
+    "length": 53370
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/runesmith.compiled-0.1.0.source.tar.gz"
+    ],
+    "sha256": "0fb67fe389132dfb98da59b5e2da2eda7454e028a5d182f2696e63f6a33fe399",
+    "length": 109752
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/runesmith.compiled-0.1.0.cdx.json"
+    ],
+    "sha256": "bf8c2eae459ecdaa7e22179bedf3a5b31979403a592f71de1fef9209c36fc143",
+    "length": 5694
+  },
+  "contracts": {
+    "assembly": "Runesmith.CompiledLanguages.Contracts.dll",
+    "sha256": "67df991a5cb8735681e0f5a456f3195b9d5babb1c8d36f2de47a7cc53566705f",
+    "package": "RunesmithHub.Runesmith.CompiledLanguages.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Highlighting, comments and brackets for Go, Rust, Swift, Dart and Pascal.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "Highlighting, comments and brackets for Go, Rust, Swift, Dart and Pascal.",
+  "name": "Compiled Languages",
+  "categories": [
+    "Languages"
+  ],
+  "keywords": [
+    "go",
+    "rs",
+    "swift",
+    "dart",
+    "pas"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/72",
+  "trackingIssue": 72,
+  "buildRun": 38269665520,
+  "analysisDigest": "4e1a79b38bdac861eab92d995ae3fce4a424e09666a97fb19505ef5784575554",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.compiled%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.CompiledLanguages.Contracts.0.1.0.nupkg",
+      "sha256": "4997f711c0735317642b8d0ca2dd2a5a51e7987dec114f4a4a9d7e4499fec513",
+      "length": 3188
+    }
+  }
+}
