@@ -1,0 +1,125 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "465f8af1e2e788b5fccfb4b272e1db771b39b388",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/runesmith.images-0.1.0.rsplugin"
+    ],
+    "sha256": "77a9563ad26e58143284b462e9d4173d1e0f9a03834f976335c9c248b0614b3d",
+    "length": 69334
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/runesmith.images-0.1.0.source.tar.gz"
+    ],
+    "sha256": "a844df74ff2e0e5829263fc0f1734e91772a5a4c45671a75dce541b9771bed81",
+    "length": 88657
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/runesmith.images-0.1.0.cdx.json"
+    ],
+    "sha256": "f4ee94d5e5d3e3f9fb4c665603208469be45101e9225531cf4ceeb72696bed63",
+    "length": 5688
+  },
+  "contracts": {
+    "assembly": "Runesmith.Images.Contracts.dll",
+    "sha256": "eba511840e851c6c17e4eba885ad0eabddd5a514b9d739474173aee02823e8d4",
+    "package": "RunesmithHub.Runesmith.Images.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "filesystem",
+        "reason": "Reads the image files you open, also outside the open folder."
+      }
+    ],
+    "detected": [
+      "filesystem"
+    ]
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The image viewer for PNG, JPEG, WebP, GIF, BMP and ICO files, with zoom. It was part of Runesmith until 0.2.0.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "Opens PNG, JPEG, WebP, GIF, BMP and ICO files in an image viewer with zoom.",
+  "name": "Images",
+  "categories": [
+    "Visualization"
+  ],
+  "keywords": [
+    "image",
+    "png",
+    "jpg",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "ico"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/80",
+  "languages": [
+    "en"
+  ],
+  "trackingIssue": 80,
+  "buildRun": 38269665520,
+  "analysisDigest": "965ddd71c8003d175ef5235547c74fe11b242a423d1349a5820949d4fadc5508",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.images%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Images.Contracts.0.1.0.nupkg",
+      "sha256": "da253f8f8562a869733185300c4b0dfb0bb0a940fa1e63419e45238d6c426466",
+      "length": 3073
+    }
+  }
+}
