@@ -1,0 +1,140 @@
+{
+  "version": "0.1.3",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "a8c42666e70a429756e410fe79cf1003d8748b0a",
+  "tag": "v0.1.3",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/runesmith.java-0.1.3.rsplugin"
+    ],
+    "sha256": "b5d0386585a1b1d7d641acf0ad5336b95e3bd27b5850eb74ba5dbe43b390e31c",
+    "length": 362899
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/runesmith.java-0.1.3.source.tar.gz"
+    ],
+    "sha256": "631f0abb35fd08cb22ea2c5b1338c2fe46bd86362f3e1bb92b52a5ac17ffb4c3",
+    "length": 314013
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/runesmith.java-0.1.3.cdx.json"
+    ],
+    "sha256": "d0ca47653269c5c73f65a2d569438fa6d3157d95f169d64078e99ac36845ebb7",
+    "length": 6166
+  },
+  "contracts": {
+    "assembly": "Runesmith.Java.Contracts.dll",
+    "sha256": "944dbcbd7b914c16d62ebab619b61a403dcd7188d331c6ea2fd07c386739791c",
+    "package": "RunesmithHub.Runesmith.Java.Contracts",
+    "packageVersion": "0.1.3"
+  },
+  "runesmithApi": ">=0.1.4 <0.2.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Lists JDK distributions and downloads the JDKs you choose to install."
+      },
+      {
+        "id": "process",
+        "reason": "Runs Maven, Gradle and java to build, run and test your projects."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Reads your projects' build files and keeps the JDKs it installs."
+      },
+      {
+        "id": "environment",
+        "reason": "Finds your JDK through JAVA_HOME."
+      }
+    ],
+    "detected": [
+      "environment",
+      "filesystem",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "api.adoptium.net",
+    "api.foojay.io",
+    "*"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38217891428",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "## What's Changed\n* feat: insert the parentheses a call needs when completing a method or a type after new by @DutchyD in https://github.com/RunesmithHub/plugin-java/pull/4\n\n## New Contributors\n* @DutchyD made their first contribution in https://github.com/RunesmithHub/plugin-java/pull/4\n\n**Full Changelog**: https://github.com/RunesmithHub/plugin-java/compare/v0.1.2...v0.1.3",
+  "summary": "Java highlighting, completion, navigation and problems, building with Maven or Gradle, and JDK downloads.",
+  "name": "Java",
+  "categories": [
+    "Languages",
+    "Build and run"
+  ],
+  "keywords": [
+    "java",
+    "maven",
+    "gradle",
+    "jdk"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/65",
+  "languages": [
+    "en"
+  ],
+  "trackingIssue": 65,
+  "buildRun": 38217891428,
+  "analysisDigest": "795fbdea3a236b2877bad0345deef4e29f33a085928d78f43ee0e594c31b4e33",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.java%400.1.3/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Java.Contracts.0.1.3.nupkg",
+      "sha256": "74a62a835ae958778523dcb25bb707ac5cac3501ee3ed8232d1a6a2858095c0f",
+      "length": 3056
+    }
+  }
+}
