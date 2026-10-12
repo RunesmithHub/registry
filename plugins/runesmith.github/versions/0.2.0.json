@@ -1,0 +1,149 @@
+{
+  "version": "0.2.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "24248277f4ac7b9e0db369a0c34a7cd25b54162d",
+  "tag": "v0.2.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/runesmith.github-0.2.0.rsplugin"
+    ],
+    "sha256": "5f1dfc440f80ce1e947c56a48dc98eea6da92c4f935442ffb3dc1a0ff009d97c",
+    "length": 303493
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/runesmith.github-0.2.0.source.tar.gz"
+    ],
+    "sha256": "b7577d2ccd5b247c2c0940ddbbf5632eec7971d40fa979b8ea6ffb7451f6e261",
+    "length": 146094
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/runesmith.github-0.2.0.cdx.json"
+    ],
+    "sha256": "10c16184c932ecc2c889ee3da83bb5aadff25b4a77c0f20c42f9b4d574403cae",
+    "length": 6202
+  },
+  "contracts": {
+    "assembly": "Runesmith.GitHub.Contracts.dll",
+    "sha256": "65ddf636806417ba440920cd49d778a502c10f9d1c99b017bd7e43ce0deec439",
+    "package": "RunesmithHub.Runesmith.GitHub.Contracts",
+    "packageVersion": "0.2.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [
+    {
+      "id": "runesmith.git",
+      "range": ">=0.2.0 <0.3.0"
+    }
+  ],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Talks to GitHub to sign you in, list repositories and show pull requests."
+      },
+      {
+        "id": "credentials",
+        "reason": "Keeps your GitHub sign-in in your system's secret store."
+      },
+      {
+        "id": "process",
+        "reason": "Opens GitHub in your browser, and can reuse the sign-in of the gh command."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Caches avatars."
+      },
+      {
+        "id": "environment",
+        "reason": "Finds the gh command on your PATH."
+      }
+    ],
+    "detected": [
+      "credentials",
+      "environment",
+      "filesystem",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "github.com",
+    "api.github.com",
+    "avatars.githubusercontent.com"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38273970626",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The contracts for hosting services are now the Git plugin's, so this plugin depends on the Git plugin 0.2.0.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "Sign in to GitHub, clone from your account and organizations, open links and work with pull requests.",
+  "name": "GitHub",
+  "categories": [
+    "Version control",
+    "Cloud and remote"
+  ],
+  "keywords": [
+    "github",
+    "pull-requests",
+    "clone"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/104",
+  "languages": [
+    "en"
+  ],
+  "trackingIssue": 104,
+  "buildRun": 38273970626,
+  "analysisDigest": "8ba96322df2f4d2af7012f00b3fd221f0a9a8c77905ab8d2fce0abeefe14ab42",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.github%400.2.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.GitHub.Contracts.0.2.0.nupkg",
+      "sha256": "c814ade024e727b4e5ceaabfebed1649b87777d55648aea24f7b597a06fe1586",
+      "length": 3076
+    }
+  }
+}
