@@ -1,0 +1,117 @@
+{
+  "version": "0.1.0",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "0ce681cfe09bc4c82c1eb795ba3cb44523338bc3",
+  "tag": "v0.1.0",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/runesmith.data-0.1.0.rsplugin"
+    ],
+    "sha256": "aae93b69e404620467443a6fe7cbcbce0b7819a6281428ebfc24dbbb8d4ecbf3",
+    "length": 55144
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/runesmith.data-0.1.0.source.tar.gz"
+    ],
+    "sha256": "09d122b566aa28363ff05b1fc9b4e7a1dbe9a4c57c395d110de60274f224674c",
+    "length": 98360
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/runesmith.data-0.1.0.cdx.json"
+    ],
+    "sha256": "3bde9b91ec2a9c422050e40b89c8cc63391356d893bd54785caa9e84d5f65416",
+    "length": 5682
+  },
+  "contracts": {
+    "assembly": "Runesmith.DataLanguages.Contracts.dll",
+    "sha256": "6400237aa84e8584a5ca36da8f308d7d2942662f9d49277c7ed66bf71488b1cc",
+    "package": "RunesmithHub.Runesmith.DataLanguages.Contracts",
+    "packageVersion": "0.1.0"
+  },
+  "runesmithApi": ">=0.2.0 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "first-version",
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38269665520",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Highlighting, comments and brackets for JSON, JSON with Comments, YAML, XML, XSL, INI, Properties and SQL.\n\nNeeds Runesmith 0.2.0, with plugin API 0.2.",
+  "summary": "Highlighting, comments and brackets for JSON, JSON with Comments, YAML, XML, XSL, INI, Properties and SQL.",
+  "name": "Data and Config Languages",
+  "categories": [
+    "Languages"
+  ],
+  "keywords": [
+    "json",
+    "jsonc",
+    "yaml",
+    "yml",
+    "xml",
+    "xsl",
+    "ini",
+    "properties",
+    "sql",
+    "conf"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/76",
+  "trackingIssue": 76,
+  "buildRun": 38269665520,
+  "analysisDigest": "6dabce81640206dd62ee356723551e972d5440b61419b3db783afb44cdfaed25",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.data%400.1.0/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.DataLanguages.Contracts.0.1.0.nupkg",
+      "sha256": "ff20060e9a65d488e213d13826e038ba698f41b4bbb5aaef3b6a8da8eada1338",
+      "length": 3180
+    }
+  }
+}
