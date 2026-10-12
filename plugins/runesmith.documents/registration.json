@@ -1,0 +1,18 @@
+{
+  "id": "runesmith.documents",
+  "repository": {
+    "id": 1415759738,
+    "url": "https://github.com/RunesmithHub/plugin-documents",
+    "path": ".",
+    "tagPrefix": "v"
+  },
+  "maintainers": [
+    {
+      "id": 59077048,
+      "login": "DutchyD"
+    }
+  ],
+  "tier": "official",
+  "state": "registered",
+  "registeredAt": "2026-10-12T15:12:03Z"
+}
