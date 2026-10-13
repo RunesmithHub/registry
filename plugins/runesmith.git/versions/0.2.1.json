@@ -1,0 +1,139 @@
+{
+  "version": "0.2.1",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "67600f022f2792382111071d0da5184cd6d5fc52",
+  "tag": "v0.2.1",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/runesmith.git-0.2.1.rsplugin"
+    ],
+    "sha256": "118a351be60705eb1d02cdb965ca343d27e2d95c6be6d070232c52f020c8d49a",
+    "length": 366907
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/runesmith.git-0.2.1.source.tar.gz"
+    ],
+    "sha256": "3d8a86ffa8459741950a94c99693b086b54e63dbbffdf0baf8d8277b9ad06ef7",
+    "length": 219877
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/runesmith.git-0.2.1.cdx.json"
+    ],
+    "sha256": "eda20df37d659ac2029356d9e71a76ad6085641da3fc96726e4aecddfbf94224",
+    "length": 5679
+  },
+  "contracts": {
+    "assembly": "Runesmith.Git.Contracts.dll",
+    "sha256": "24e71caa4de7210919d672895c58d886ab789581524a03b47536f0953d760ad9",
+    "package": "RunesmithHub.Runesmith.Git.Contracts",
+    "packageVersion": "0.2.1"
+  },
+  "runesmithApi": ">=0.2.1 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [
+      {
+        "id": "network",
+        "reason": "Shows the avatars of the people behind commits and pull requests."
+      },
+      {
+        "id": "process",
+        "reason": "Runs your git, and opens links in your browser."
+      },
+      {
+        "id": "filesystem",
+        "reason": "Watches your repositories, edits .gitignore and caches avatars."
+      },
+      {
+        "id": "environment",
+        "reason": "Suggests a folder in your home folder to clone into."
+      }
+    ],
+    "detected": [
+      "environment",
+      "filesystem",
+      "network",
+      "process"
+    ]
+  },
+  "networkHosts": [
+    "*"
+  ],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38350503935",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "The clone command's id is now the Git plugin's own, `GitCommandIds.CloneRepository` in `Runesmith.Git.Contracts`, and **Clone Repository...** is on the Welcome page and in the project button's menu through `ContextMenus.Project`.\n\nNeeds Runesmith 0.2.1, with plugin API 0.2.1.",
+  "summary": "Changes, commits, branches, history, diffs, change markers, cloning and pull requests with Git.",
+  "name": "Git",
+  "categories": [
+    "Version control"
+  ],
+  "keywords": [
+    "git",
+    "gitignore",
+    "patch",
+    "commit",
+    "branch",
+    "diff"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/108",
+  "languages": [
+    "en"
+  ],
+  "trackingIssue": 108,
+  "buildRun": 38350503935,
+  "analysisDigest": "529430099a16282e286954fc5e0a369013e862f138bf6c313c3d6c71468ab466",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/icon-64.png",
+        "sha256": "57ca09752124247b0540cca8f607f2e6902e233fe861a37128ed4ab61847e6f0",
+        "length": 4760,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/icon-128.png",
+        "sha256": "ce67e6f666a6da0ce06b35bfb395c1095c05e4784a4e6e50521debef459dd75f",
+        "length": 16632,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.git%400.2.1/icon-256.png",
+        "sha256": "11b5e3ef798179f1b152647121485dcb315dd1220c3769680b5d8e806099507d",
+        "length": 60446,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Git.Contracts.0.2.1.nupkg",
+      "sha256": "cbf375672b478dc488cf396c005936c13010acbc62494b21992a200f6ee1ad29",
+      "length": 16434
+    }
+  }
+}
