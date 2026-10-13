@@ -1,0 +1,125 @@
+{
+  "version": "0.2.2",
+  "state": "review",
+  "review": {
+    "state": "automated"
+  },
+  "commit": "f6fbd76be356dde78efd5d3573ee97bbbf2c5f99",
+  "tag": "v0.2.2",
+  "releaseAuthor": {
+    "id": 59077048,
+    "login": "DutchyD"
+  },
+  "package": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/runesmith.dutch-0.2.2.rsplugin"
+    ],
+    "sha256": "373aaffcd6d674b9d68e7392b440ad70f4158b39f06542d3f8bb718eabc37b82",
+    "length": 87585
+  },
+  "source": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/runesmith.dutch-0.2.2.source.tar.gz"
+    ],
+    "sha256": "44f490934566d00aa551b2e0366b5f24b3e624ecd95f9e4819ce0062e9e14a03",
+    "length": 130630
+  },
+  "sbom": {
+    "urls": [
+      "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/runesmith.dutch-0.2.2.cdx.json"
+    ],
+    "sha256": "111ba996661e674b39c137c908f0ab15d507ff8626dab18d6cfb694b7eca207c",
+    "length": 5156
+  },
+  "contracts": {
+    "assembly": "Runesmith.Dutch.Contracts.dll",
+    "sha256": "b0b5ab565a72d3795083553bd1b451e16d0dc0ba8b7dc470322a47e4e74936d4",
+    "package": "RunesmithHub.Runesmith.Dutch.Contracts",
+    "packageVersion": "0.2.2"
+  },
+  "runesmithApi": ">=0.2.2 <0.3.0",
+  "dependencies": [],
+  "capabilities": {
+    "declared": [],
+    "detected": []
+  },
+  "networkHosts": [],
+  "platforms": [],
+  "analysis": {
+    "verdict": "review",
+    "triggers": [
+      "tier"
+    ]
+  },
+  "build": {
+    "run": "https://github.com/RunesmithHub/registry/actions/runs/38445868558",
+    "sdk": "10.0.401",
+    "reproducible": true
+  },
+  "releaseNotes": "Translates the dialog Runesmith shows when its build is incomplete, and the setting for reporting a start that gets stuck.\n\nNeeds Runesmith 0.2.2, with plugin API 0.2.2.",
+  "summary": "Runesmith and its official plugins in Dutch (Nederlands).",
+  "name": "Dutch Language Pack",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "dutch",
+    "nederlands",
+    "language-pack",
+    "translation",
+    "localization"
+  ],
+  "license": "Apache-2.0",
+  "reportUrl": "https://github.com/RunesmithHub/registry/issues/131",
+  "languagePack": {
+    "language": "nl",
+    "name": "Nederlands",
+    "englishName": "Dutch",
+    "targets": [
+      "runesmith",
+      "runesmith.csharp",
+      "runesmith.git",
+      "runesmith.gitea",
+      "runesmith.github",
+      "runesmith.images",
+      "runesmith.java"
+    ]
+  },
+  "trackingIssue": 131,
+  "buildRun": 38445868558,
+  "analysisDigest": "c34605351804c2a84ff94a02fa08bc889673bd8dcf8eea632a5cc5eaf255104b",
+  "assets": {
+    "icon": {
+      "64": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/icon-64.png",
+        "sha256": "d7fbbe98c07f07682ec621977360a0629538e7cb2bdee4e84e44fd071739c315",
+        "length": 4546,
+        "width": 64,
+        "height": 64,
+        "format": "png"
+      },
+      "128": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/icon-128.png",
+        "sha256": "ddad67a54d29a5e32f197c56efa99ad042ccefec9578d3ca91a9f8687eb64684",
+        "length": 15431,
+        "width": 128,
+        "height": 128,
+        "format": "png"
+      },
+      "256": {
+        "url": "https://github.com/RunesmithHub/packages/releases/download/runesmith.dutch%400.2.2/icon-256.png",
+        "sha256": "f4fdf77dae8c43da60116620bc6bc0a2482fad14b366726b075d19e03d1e81fb",
+        "length": 53847,
+        "width": 256,
+        "height": 256,
+        "format": "png"
+      }
+    },
+    "gallery": [],
+    "contractsPackage": {
+      "file": "RunesmithHub.Runesmith.Dutch.Contracts.0.2.2.nupkg",
+      "sha256": "9b1077f2c7795e0e0b1249162ead5ceddbb2d9ba45d88fd794ca173d80da4c71",
+      "length": 2555
+    }
+  }
+}
