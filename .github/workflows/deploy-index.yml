@@ -17,7 +17,7 @@ jobs:
   deploy:
     name: Deploy the index
     if: github.ref == 'refs/heads/index'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment:
       name: github-pages

@@ -23,7 +23,7 @@ env:
 jobs:
   moderate:
     name: Sign the moderation list
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     environment: moderate
     permissions:
@@ -101,7 +101,7 @@ jobs:
   timestamp:
     name: Sign the timestamp
     needs: moderate
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: timestamp
     permissions:
