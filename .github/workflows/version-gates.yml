@@ -22,7 +22,7 @@ jobs:
   request:
     name: Re-check after a review
     if: github.event_name == 'pull_request_review' && github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     permissions:
       actions: write
@@ -37,7 +37,7 @@ jobs:
   gates:
     name: Gates
     if: github.event_name == 'pull_request_target' || (github.event_name == 'workflow_dispatch' && inputs.pr != '')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     environment: bot
     permissions:
@@ -100,7 +100,7 @@ jobs:
   hold:
     name: Update holds
     if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.pr == '')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
     environment: bot
     permissions:

@@ -15,7 +15,7 @@ jobs:
       contains(github.event.issue.labels.*.name, 'deprecate') || contains(github.event.issue.labels.*.name, 'undeprecate') ||
       contains(github.event.issue.labels.*.name, 'maintainers') || contains(github.event.issue.labels.*.name, 'verification') ||
       contains(github.event.issue.labels.*.name, 'delete') || contains(github.event.issue.labels.*.name, 'transfer')
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: bot
     permissions:

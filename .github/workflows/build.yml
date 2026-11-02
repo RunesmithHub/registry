@@ -28,7 +28,7 @@ env:
 jobs:
   build:
     name: Build (${{ matrix.output }})
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     permissions:
       contents: read
@@ -158,7 +158,7 @@ jobs:
   compare:
     name: Compare the builds
     needs: build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     permissions:
       contents: read
@@ -195,7 +195,7 @@ jobs:
   analyse:
     name: Analyse
     needs: compare
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 20
     environment: bot
     permissions:
@@ -283,7 +283,7 @@ jobs:
   propose:
     name: Propose the version
     needs: analyse
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: bot
     permissions:
@@ -337,7 +337,7 @@ jobs:
     name: Report a failed build
     needs: [build, compare, analyse, propose]
     if: failure()
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     environment: bot
     permissions: {}

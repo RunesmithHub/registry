@@ -26,7 +26,7 @@ env:
 jobs:
   publish:
     name: Release and sign the snapshot
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
     environment: publish
     permissions:
@@ -134,7 +134,7 @@ jobs:
     name: Sign the first moderation list
     needs: publish
     if: needs.publish.outputs.bootstrap == 'true'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: moderate
     permissions:
@@ -175,7 +175,7 @@ jobs:
     name: Sign the timestamp
     needs: [publish, bootstrap-moderation]
     if: ${{ !cancelled() && needs.publish.result == 'success' && needs.bootstrap-moderation.result != 'failure' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: timestamp
     permissions:
@@ -216,7 +216,7 @@ jobs:
     name: Announce the published versions
     needs: [publish, timestamp]
     if: ${{ !cancelled() && needs.timestamp.result == 'success' && needs.publish.outputs.count != '0' }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     environment: bot
     permissions:
